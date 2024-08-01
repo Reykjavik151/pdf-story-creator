@@ -11,8 +11,8 @@ export const WelcomeScreen = () => {
   }, [router]);
 
   return (
-    <View className="flex justify-center items-center">
-      <Text>Welcome to the application!</Text>
+    <View className="flex-1 justify-center items-center">
+      <Text>Welcome to the PDF Story Creator application!</Text>
       <Text onPress={goToStoryCreator}>CREATE YOUR STORY!</Text>
     </View>
   );
