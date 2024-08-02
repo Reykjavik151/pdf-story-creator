@@ -6,6 +6,7 @@ import '../../nativewind.css';
 import { NO_HEADER_OPTIONS } from '#constants/navigation';
 
 import { store } from '../redux/store';
+import { useFontInit } from '#hooks/useFontInit';
 
 // Root navigation stack
 const RootStack = () => (
@@ -17,6 +18,11 @@ const RootStack = () => (
 
 // Here we can apply different context providers
 export default function RootLayout() {
+  const isFontsLoadFinished = useFontInit();
+  if (!isFontsLoadFinished) {
+    return null;
+  }
+
   return (
     <ReduxProvider store={store}>
       <RootStack />

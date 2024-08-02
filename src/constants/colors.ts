@@ -1,4 +1,8 @@
 export const COLORS = {
   primary: '#FFFFFF',
-  secondary: '#000000',
+  secondaryLightGray: '#F2F2F2',
+  secondaryDarkGray: '#333333',
+  blackAccent: '#000000',
+  orangeAccent: '#FF6F00',
+  tealAccent: '#008080',
 };
