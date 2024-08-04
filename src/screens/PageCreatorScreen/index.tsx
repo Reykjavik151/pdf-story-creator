@@ -13,8 +13,11 @@ export const PageCreatorScreen = () => {
   const {
     viewShotRef,
     lastViewShotImageUri,
+    selectedImageFromGallery,
     onCapturePage,
     onDownloadImageToGallery,
+    onPickImageFromGallery,
+    // onResetImageFromGallery,
   } = usePageCreatorScreenController();
 
   return (
@@ -32,8 +35,19 @@ export const PageCreatorScreen = () => {
 
       <ViewShot style={generalStyles.flex} ref={viewShotRef}>
         <View className="flex-1 justify-center items-center bg-primary">
-          <Text>PageCreatorScreen</Text>
+          <Text onPress={onPickImageFromGallery}>PageCreatorScreen</Text>
           <Image className="bg-black rounded-lg" source={ReactLogo} />
+          {!!selectedImageFromGallery && (
+            <Image
+              source={{ uri: selectedImageFromGallery.assets[0].uri }}
+              style={{
+                width: 200,
+                height: 200,
+                borderWidth: 2,
+                borderColor: 'black',
+              }}
+            />
+          )}
         </View>
         {lastViewShotImageUri ? (
           <Image className="flex-1" source={{ uri: lastViewShotImageUri }} />

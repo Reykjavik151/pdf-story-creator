@@ -1,9 +1,11 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 import ViewShot from 'react-native-view-shot';
 import * as MediaLibrary from 'expo-media-library';
 import { useAppDispatch, useAppSelector } from '#redux/hooks';
 import { selectLastCreatedPageUri } from '#redux/pages/pagesSelectors';
-import { setCreatedPage } from '#redux/pages/pagesSlice';
+import { addCreationOptions, setCreatedPage } from '#redux/pages/pagesSlice';
+import { useImagePicker } from '#hooks/useImagePicker';
+import { usePrevious } from 'react-native-hookbox';
 
 export const usePageCreatorScreenController = () => {
   const dispatch = useAppDispatch();
@@ -12,6 +14,29 @@ export const usePageCreatorScreenController = () => {
 
   const viewShotRef = useRef<ViewShot>(null);
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
+
+  const {
+    selectedImage: selectedImageFromGallery,
+    pickImage: onPickImageFromGallery,
+    resetImage: onResetImageFromGallery,
+  } = useImagePicker();
+  const previousSelectedImageFromGallery = usePrevious(
+    selectedImageFromGallery,
+  );
+
+  // Update page creation options after selectedImageFromGallery changes
+  useEffect(() => {
+    if (
+      selectedImageFromGallery &&
+      selectedImageFromGallery !== previousSelectedImageFromGallery
+    ) {
+      dispatch(
+        addCreationOptions({
+          imageUri: selectedImageFromGallery.assets[0].uri,
+        }),
+      );
+    }
+  }, [dispatch, selectedImageFromGallery, previousSelectedImageFromGallery]);
 
   const onDownloadImageToGallery = useCallback(async () => {
     // Only existing image URIs should be saved to the gallery
@@ -26,21 +51,19 @@ export const usePageCreatorScreenController = () => {
     }
   }, [permissionResponse, lastViewShotImageUri, requestPermission]);
 
-  const onViewShotCapture = useCallback(
-    (uri: string) => {
-      dispatch(setCreatedPage(uri));
-    },
-    [dispatch],
-  );
-
   const onCapturePage = useCallback(() => {
-    viewShotRef.current?.capture?.().then(onViewShotCapture);
-  }, [onViewShotCapture]);
+    viewShotRef.current?.capture?.().then((uri: string) => {
+      dispatch(setCreatedPage(uri));
+    });
+  }, [dispatch]);
 
   return {
     viewShotRef,
     lastViewShotImageUri,
+    selectedImageFromGallery,
     onCapturePage,
     onDownloadImageToGallery,
+    onPickImageFromGallery,
+    onResetImageFromGallery,
   };
 };
