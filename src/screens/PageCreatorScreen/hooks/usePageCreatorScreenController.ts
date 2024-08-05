@@ -20,16 +20,11 @@ export const usePageCreatorScreenController = () => {
     pickImage: onPickImageFromGallery,
     resetImage: onResetImageFromGallery,
   } = useImagePicker();
-  const previousSelectedImageFromGallery = usePrevious(
-    selectedImageFromGallery,
-  );
+  const previousSelectedImageFromGallery = usePrevious(selectedImageFromGallery);
 
   // Update page creation options after selectedImageFromGallery changes
   useEffect(() => {
-    if (
-      selectedImageFromGallery &&
-      selectedImageFromGallery !== previousSelectedImageFromGallery
-    ) {
+    if (selectedImageFromGallery && selectedImageFromGallery !== previousSelectedImageFromGallery) {
       dispatch(
         addCreationOptions({
           imageUri: selectedImageFromGallery.assets[0].uri,
@@ -52,7 +47,7 @@ export const usePageCreatorScreenController = () => {
   }, [permissionResponse, lastViewShotImageUri, requestPermission]);
 
   const onCapturePage = useCallback(() => {
-    viewShotRef.current?.capture?.().then((uri: string) => {
+    viewShotRef.current?.capture?.().then((uri) => {
       dispatch(setCreatedPage(uri));
     });
   }, [dispatch]);

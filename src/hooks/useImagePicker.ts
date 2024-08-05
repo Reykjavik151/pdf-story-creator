@@ -4,8 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Nullable } from '#types/Nullable';
 
 export const useImagePicker = () => {
-  const [selectedImage, setSelectedImage] =
-    useState<Nullable<ImagePicker.ImagePickerSuccessResult>>(null);
+  const [selectedImage, setSelectedImage] = useState<Nullable<ImagePicker.ImagePickerSuccessResult>>(null);
 
   const pickImage = useCallback(async () => {
     const result = await ImagePicker.launchImageLibraryAsync({

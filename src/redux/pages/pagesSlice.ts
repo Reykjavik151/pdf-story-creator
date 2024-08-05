@@ -20,10 +20,7 @@ export const pagesSlice = createSlice({
   name: 'pages',
   initialState: INITIAL_STATE,
   reducers: {
-    addCreationOptions: (
-      state,
-      { payload }: PayloadAction<Partial<PagesState['creationOptions']>>,
-    ) => {
+    addCreationOptions: (state, { payload }: PayloadAction<Partial<PagesState['creationOptions']>>) => {
       state.creationOptions = {
         ...state.creationOptions,
         ...payload,
@@ -38,7 +35,6 @@ export const pagesSlice = createSlice({
   },
 });
 
-export const { addCreationOptions, resetCreationOptions, setCreatedPage } =
-  pagesSlice.actions;
+export const { addCreationOptions, resetCreationOptions, setCreatedPage } = pagesSlice.actions;
 
 export const pagesReducer = pagesSlice.reducer;

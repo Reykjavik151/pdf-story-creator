@@ -8,21 +8,14 @@ type Props = {
   onDownloadImageToGallery: () => void;
 };
 
-export const PageHeaderButtons = ({
-  isDownloadActive,
-  onCapturePage,
-  onDownloadImageToGallery,
-}: Props) => {
+export const PageHeaderButtons = ({ isDownloadActive, onCapturePage, onDownloadImageToGallery }: Props) => {
   return (
     <View className="gap-4 flex-row pr-4">
       <TouchableOpacity onPress={onCapturePage}>
         <MaterialCommunityIcons name="check-decagram" size={36} color="white" />
       </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={onDownloadImageToGallery}
-        disabled={!isDownloadActive}
-      >
+      <TouchableOpacity onPress={onDownloadImageToGallery} disabled={!isDownloadActive}>
         <MaterialCommunityIcons
           name="file-download"
           size={36}

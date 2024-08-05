@@ -8,6 +8,7 @@ import ReactLogo from '../../../assets/images/react-logo.png';
 import { usePageCreatorScreenController } from './hooks/usePageCreatorScreenController';
 import { Header } from '#components';
 import { PageHeaderButtons } from './components/PageHeaderButtons';
+import { EditPageButton } from './components';
 
 export const PageCreatorScreen = () => {
   const {
@@ -23,7 +24,7 @@ export const PageCreatorScreen = () => {
   return (
     <View className="flex-1">
       <Header
-        title="Create your page!"
+        title="NEW PAGE"
         rightAbsoluteElement={
           <PageHeaderButtons
             isDownloadActive={!!lastViewShotImageUri}
@@ -49,9 +50,9 @@ export const PageCreatorScreen = () => {
             />
           )}
         </View>
-        {lastViewShotImageUri ? (
-          <Image className="flex-1" source={{ uri: lastViewShotImageUri }} />
-        ) : null}
+        {lastViewShotImageUri ? <Image className="flex-1" source={{ uri: lastViewShotImageUri }} /> : null}
+
+        <EditPageButton />
       </ViewShot>
     </View>
   );
