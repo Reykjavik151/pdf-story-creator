@@ -1,5 +1,7 @@
 import { Stack } from 'expo-router';
 import { Provider as ReduxProvider } from 'react-redux';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
 
 import '../../nativewind.css';
 
@@ -25,7 +27,10 @@ export default function RootLayout() {
 
   return (
     <ReduxProvider store={store}>
-      <RootStack />
+      <SafeAreaProvider>
+        <StatusBar barStyle="light-content" />
+        <RootStack />
+      </SafeAreaProvider>
     </ReduxProvider>
   );
 }

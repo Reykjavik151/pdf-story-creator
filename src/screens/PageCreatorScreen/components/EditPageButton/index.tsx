@@ -8,7 +8,7 @@ export const EditPageButton = () => {
   const router = useRouter();
 
   const onPress = useCallback(() => {
-    router.navigate('');
+    router.navigate('(tabs)/page-stack/page-create-options');
   }, [router]);
 
   return (

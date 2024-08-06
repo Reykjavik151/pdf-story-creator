@@ -19,7 +19,7 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="page-stack"
         options={{
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
@@ -31,15 +31,11 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="story-creator"
+        name="story-stack"
         options={{
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
-              name={
-                focused
-                  ? 'book-open-page-variant'
-                  : 'book-open-page-variant-outline'
-              }
+              name={focused ? 'book-open-page-variant' : 'book-open-page-variant-outline'}
               size={30}
               color={focused ? COLORS.orangeAccent : COLORS.blackAccent}
             />
@@ -47,7 +43,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="settings-stack"
         options={{
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
