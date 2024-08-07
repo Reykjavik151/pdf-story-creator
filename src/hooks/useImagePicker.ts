@@ -8,7 +8,8 @@ export const useImagePicker = () => {
 
   const pickImage = useCallback(async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      aspect: [1, 1.41],
       quality: 1,
     });
 
