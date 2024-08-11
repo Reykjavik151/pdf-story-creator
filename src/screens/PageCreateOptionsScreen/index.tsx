@@ -10,8 +10,8 @@ export const PageCreateOptionsScreen = () => {
       <Header title="PAGE OPTIONS" />
       <KeyboardAvoidingView behavior="padding" className="flex-1">
         <ScrollView
-          className="flex-1 p-4 bg-primary"
-          contentContainerClassName="pb-16"
+          className="flex-1 bg-primary"
+          contentContainerClassName="p-4 pb-16 overflow-visible"
           showsVerticalScrollIndicator={false}
         >
           <ImagePicker title="Image" />
